@@ -1,6 +1,10 @@
 from apify_client import ApifyClient
 import pandas as pd
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # ==============================
 # CONFIG
@@ -91,6 +95,16 @@ if not all_new_data:
     exit()
 
 df_new = pd.concat(all_new_data, ignore_index=True)
+
+# Keep only common columns between old and new data
+if not df_existing.empty:
+    common_cols = df_existing.columns.intersection(df_new.columns).tolist()
+    
+    df_existing = df_existing[common_cols]
+    df_new = df_new[common_cols]
+else:
+    # First run - keep all columns from new data
+    print("First run detected - keeping all columns from new scrape")
 
 df_combined = pd.concat(
     [df_existing, df_new],
