@@ -3,7 +3,7 @@ category_encoders
 joblib
 numpy
 pandas
-protobuf
+protobuf<=3.20.3
 python-dotenv
 scikit_learn
 scipy
