@@ -8,3 +8,4 @@ python-dotenv
 scikit_learn
 scipy
 streamlit>=1.30
+lightgbm
