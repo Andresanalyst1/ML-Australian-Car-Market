@@ -10,8 +10,8 @@ df = pd.read_csv("data/cleaned_car_dataset_final.csv")
 st.set_page_config(layout="wide", page_title="Australian Car Price Prediction")
 
 st.title('🚗 Australian Car Price Prediction')
-st.markdown('### This interactive app helps you analyze the Australian car market. ' \
-'You can filter and explore car prices, specifications, and more.')
+st.markdown(" ##### Explore the **best-selling vehicles** in the Australian market through data. \n" \
+"Enter **your vehicle's details** to get an AI-powered price estimate based on real market listings.")
 
 
 st.header('Car Details Input')
@@ -81,3 +81,46 @@ if clicked:
     """
     )
 
+st.markdown(' #### Do you want to be more specific rating you car? \n' \
+'Please respond these questions below: ')
+
+drivetrain_array = sorted([d for d in df['drivetrain'].unique() if d != 'quattro'])
+drivetrain = st.selectbox('Do you know the **drivetrain** of your vehicle? ',drivetrain_array,index=drivetrain_array.index('FWD')) #Drivetrain input
+    
+body_style_array = np.sort(df[df['vehicle_make_display_name'] == brand]['body_style'].unique())
+body_style = st.selectbox('Do you know the **body style** of your vehicle? ',body_style_array) #body_style input
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.markdown('##### Considering cars of the same brand, rate your vehicle from 1 to 5 '
+'(1 = Poor, 5 = Excellent) based on: ')
+
+performance_metrics = st.number_input(' **Performance metrics** like Horsepower, engine size, '
+'and acceleration time.',min_value=1, max_value=5, value=3) #performance_metric input
+
+luxury = st.number_input(' **Brand positioning** and trim level. ' \
+'Consider interior quality, extra features, luxury and market segment.',min_value=1, max_value=5, value=3) #performance_metric input
+
+size = df[df['vehicle_model_display_name']== model]['size'].mean().round(2)
+
+clicked = st.button("Submit",key = 1, type = "primary")
+
+if clicked:
+    input_vector = [[state,transmission,fuel_type,drivetrain,brand,model,color,body_style,year,kilometers,
+                     performance_metrics,luxury,size]]
+    
+    predicted_price = np.exp(predicting(input_vector))[0]
+
+    st.markdown(f"""
+    <div style='text-align: center; padding: 30px; background-color: #f0f2f6; border-radius: 10px;'>
+        <p style='font-size: 18px; color: gray; margin: 0;'>Estimated Vehicle Price</p>
+        <p style='font-size: 48px; font-weight: bold; color: #1f77b4; margin: 0;'>${predicted_price:,.0f}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+    """
+    ---
+ 
+    """
+    )

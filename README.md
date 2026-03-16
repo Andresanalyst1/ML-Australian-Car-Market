@@ -1,7 +1,11 @@
 # Car Price Prediction Project (Web Scraping → ML → Streamlit)
 
 ## Project Overview
-This project focuses on building a **real-world car price prediction system** using **real market data** scraped from multiple websites.
+
+![Pipeline Architecture](images/Readme-Workflow.png)
+
+
+This project focuses on building a **real-world car price prediction system** using **real market data** scraped from Facebook Marketplace in Australia.
 
 The goal is to: <br/>
 - Collect **real car prices** from online sources.  
@@ -15,9 +19,9 @@ This project follows an **end-to-end data science workflow**, from data collecti
 
 ## Project Objectives
 
-- Scrape car listings data from different websites  
+- Scrape car listings data from Facebook Marketplace  
 - Perform **Exploratory Data Analysis (EDA)**  
-- Apply data cleaning and preprocessing  
+- Apply data cleaning and preprocessing using AI agents to reduce the process ensuring efficiency.
 - Perform **feature engineering**  
 - Train and evaluate multiple **machine learning models**
 - Select the best-performing model  
@@ -36,10 +40,12 @@ This project follows an **end-to-end data science workflow**, from data collecti
    - Transmission
    - Location
    - Price
+   - Color
 
 2. **Data Cleaning & Preprocessing**
    - Handle missing values  
-   - Remove duplicates  
+   - Remove duplicates
+   - Cleaning model cars variations.  
    - Normalise and format variables  
 
 3. **Exploratory Data Analysis (EDA)**
@@ -53,7 +59,7 @@ This project follows an **end-to-end data science workflow**, from data collecti
    - Feature selection  
 
 5. **Machine Learning**
-   - Train multiple models (e.g. Linear Regression, Random Forest, XGBoost)  
+   - Train multiple models (e.g. Linear Regression, Random Forest, XGBoost, LGBoost)  
    - Model evaluation using appropriate metrics  
    - Hyperparameter tuning  
 
@@ -65,10 +71,10 @@ This project follows an **end-to-end data science workflow**, from data collecti
 
 ## Tech Stack
 - **Python**
-- **BeautifulSoup / Selenium** (Web Scraping)
+- **Apify** (Web Scraping)
 - **Pandas, NumPy** (Data manipulation)
 - **Matplotlib, Seaborn** (EDA & Visualization)
-- **Scikit-learn** (Machine Learning)
+- **Scikit-learn, scipy, category_encoders** (Machine Learning)
 - **Streamlit** (Deployment)
 
 ---
@@ -77,4 +83,6 @@ This project follows an **end-to-end data science workflow**, from data collecti
 - Clean and structured dataset with real car prices  
 - Insights into car market pricing trends  
 - A trained ML model capable of predicting
+- Stream link [here](https://ml-australian-car-market.streamlit.app/)
+
 
